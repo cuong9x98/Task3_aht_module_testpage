@@ -1,0 +1,159 @@
+<button id="button-alert"">Open Modal</button>
+<button id="button-notification">Open Magento Login Modal</button>
+
+<button  id="button">
+    <span><?= $block->escapeHtml(__('Open Customer Login Modal')) ?></span>
+</button>
+
+<!-- Link to open the modal -->
+
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        $( "#button-alert" ).click(function() {
+            alert( "Hello World!" );
+        });
+    });
+</script>
+
+<!--Form modal-->
+<div id="modal" class="modal">
+    <div class="modal-body-content">
+        <input class="form-text" type="text"></input>
+        <input class="form-password" type="password"></input>
+        <button class="modal-button">Login</button>
+        <div class="registered">
+            <span class="span">Not registered</span>
+            <a href="#" class="a">Create an account</a>
+        </div>
+    </div>
+</div>
+<!--js modal-->
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],function($, modal) {
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            title: 'Login Modal',
+        };
+
+        var popup = modal(options, $('#modal'));
+        $("#button").click(function() {
+            $('#modal').modal('openModal');
+        });
+    });
+</script>
+<style>
+    .span {
+        font-size:8px;
+    }
+    .a {
+        font-size:8px
+    }
+    .registered {
+        text-align: center;
+    }
+    .modal {
+        width: 20%;
+        margin: auto;
+        padding:50px;
+        background-color: #fff;
+    }
+    .form-text {
+        background: #fff;
+        background-clip: padding-box;
+        border: 1px solid #c2c2c2;
+        border-radius: 1px;
+        font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        height: 32px;
+        line-height: 1.42857143;
+        padding: 0 9px;
+        vertical-align: baseline;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+        height: 40px;
+    }
+    .form-password {
+        background: #fff;
+        background-clip: padding-box;
+        border: 1px solid #c2c2c2;
+        border-radius: 1px;
+        font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        height: 32px;
+        line-height: 1.42857143;
+        padding: 0 9px;
+        vertical-align: baseline;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+        height: 40px;
+    }
+    .modal-button {
+        width: 100%;
+        color:#fff;
+        margin-bottom: 5px;
+        background-color:#4caf50;
+    }
+
+    #modal-content-0 {
+        padding: 50px;
+        background-color: #83bd62;
+    }
+    .modal-footer {
+       display:none;
+    }
+    .modal-header h1 {
+        border-bottom: 0px;
+    }
+</style>
+<!--Aler Magento-->
+<div class="alert-modal-content" style="display:none">
+    <p>Đây là thông báo mặc định của magento cung cấp</p>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ], function ($) {
+        'use strict';
+        $( "#button-notification" ).click(function() {
+            $('.alert-modal-content').alert({
+                title: 'This is a alert of magento',
+                modalClass: 'alert',
+                actions: {
+                    always: function() {
+                        // do something when the modal is closed
+                    }
+                },
+                buttons: [{
+                    text: $.mage.__('Accept'),
+                    class: 'action primary accept',
+
+                    /**
+                     * Click handler.
+                     */
+                    click: function () {
+                        this.closeModal(true);
+                    }
+                }, {
+                    text: $.mage.__('New Action'),
+                    class: 'action',
+
+                    /**
+                     * Click handler.
+                     */
+                    click: function () {
+                        // New action
+                    }
+                }]
+            });
+        });
+    });
+</script>
